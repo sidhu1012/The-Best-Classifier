@@ -168,7 +168,7 @@ print( "The best accuracy was with", mean_acc.max(), "with k=", mean_acc.argmax(
 
 k=mean_acc.argmax()+1
 
-k_neigh=KNeighborsClassifier(n_neighbors=k).fit(x_train,y_train)
+k_neigh=KNeighborsClassifier(n_neighbors=k).fit(X,y)
 
 
 # In[20]:
@@ -196,8 +196,7 @@ plt.show()
 
 from sklearn.tree import DecisionTreeClassifier
 LoanTree=DecisionTreeClassifier(criterion='entropy',max_depth=4)
-LoanTree.fit(x_train,y_train)
-PredTree=LoanTree.predict(x_test)
+LoanTree.fit(X,y)
 
 
 # In[22]:
@@ -226,8 +225,7 @@ plt.imshow (img,interpolation='nearest')
 
 from sklearn import svm
 lm=svm.SVC(kernel='rbf')
-lm.fit(x_train,y_train)
-y_hat=lm.predict(x_test)
+lm.fit(X,y)
 
 
 # In[24]:
@@ -236,8 +234,7 @@ y_hat=lm.predict(x_test)
 # Logistic Regression
 
 from sklearn.linear_model import LogisticRegression
-LR=LogisticRegression(C=0.01,solver='liblinear').fit(x_train,y_train)
-y_hat_LR=LR.predict(x_test)
+LR=LogisticRegression(C=0.01,solver='liblinear').fit(X,y)
 
 
 # In[25]:
@@ -300,25 +297,25 @@ feature.head()
 # In[33]:
 
 
-X = Feature
+X = feature
 X[0:5]
 
 
-# In[34]:
+# In[36]:
 
 
-y = df['loan_status'].values
+y = test_df['loan_status'].values
 y[0:5]
 
 
-# In[35]:
+# In[37]:
 
 
 X= preprocessing.StandardScaler().fit(X).transform(X)
 X[0:5]
 
 
-# In[36]:
+# In[38]:
 
 
 from sklearn.metrics import jaccard_similarity_score
@@ -326,7 +323,7 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import log_loss
 
 
-# In[60]:
+# In[39]:
 
 
 #KNN
@@ -346,7 +343,7 @@ y_l=y_l.transform(y)
 K_F=f1_score(y_l,y_hat_l)
 
 
-# In[54]:
+# In[40]:
 
 
 #Decision Tree
@@ -362,7 +359,7 @@ y_hat_l=y_hat_l.transform(y_hat)
 T_F=f1_score(y_l,y_hat_l)
 
 
-# In[56]:
+# In[41]:
 
 
 #SVM
@@ -378,7 +375,7 @@ y_hat_l=y_hat_l.transform(y_hat)
 T_F=f1_score(y_l,y_hat_l)
 
 
-# In[76]:
+# In[42]:
 
 
 #LR
@@ -396,7 +393,7 @@ L_F=f1_score(y_l,y_hat_l)
 L_L=log_loss(y_l,y_hat_l)
 
 
-# In[87]:
+# In[43]:
 
 
 print('Algorithm:\t\t jaccard \t\t F1 score \t\t Log Loss')
@@ -404,6 +401,12 @@ print(f'KNN\t\t     {K_J}\t\t{K_F}\t    NA')
 print(f'Decision Tree\t     {T_J}\t\t{T_F}\t    NA')
 print(f'SVM\t\t     {S_J}\t\t{T_F}\t    NA')
 print(f'Logistic Expression  {L_J}\t        {L_F}\t {L_L}')
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
